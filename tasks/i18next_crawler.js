@@ -21,30 +21,36 @@ module.exports = function (grunt) {
       separator: ', '
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function (file) {
-      // Concat specified files.
-      var src = file.src.filter(function (filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+    // Load JSON output file
+    var translationFile = this.files[0].dest[0];
+    if (!grunt.file.exists(translationFile)) {
+      grunt.log.writeln("Translation file doesn't exist – Creating new...");
+      grunt.file.write(translationFile, "{}", { encoding: "utf8"});
+    }
+    var translations = grunt.file.readJSON(translationFile, { encoding: "utf8"});
+
+    // Find all HTML template files
+    var rootTemplateDir = this.files[0].src[0];
+    var templates = grunt.file.expand({cwd: rootTemplateDir }, '**/*.html');
+
+    templates.forEach(function(templateDir) {
+      var fileContent = grunt.file.read(rootTemplateDir + '/' + templateDir, { encoding: "utf8" });
+      // fileContent = fileContent.replace(/\r\n/g, "").replace(/[\r\n]/g, "");
+      grunt.log.write(fileContent);
+      
+      var re = /{{ ['|"]([\s\S]*?)["|'] \| i18next }}/g;
+      
+      var match;
+      var templateTranslations = {};
+      while ((match = re.exec(fileContent)) !== null) {
+        if (!(match[1] in translations)) {
+          templateTranslations[match[1]] = "";
         }
-      }).map(function (filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+      }
+      translations[templateDir] = templateTranslations;
 
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
+      grunt.file.write(translationFile, JSON.stringify(translations, null, "    "), { encoding: "utf8"});
+  
     });
   });
 
