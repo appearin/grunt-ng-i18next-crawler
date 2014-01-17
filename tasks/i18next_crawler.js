@@ -14,14 +14,11 @@ module.exports = function (grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('i18next_crawler', 'Crawl templates files, find uses of i18next, and generate keys in your translation files', function () {
+    var fileContent, match, key, templateTranslations;
+    var filterRegex = /{{ ['|"]([\s\S]*?)["|'] \| i18next }}/g;
+    var directiveRegex = /ng-i18next="(?:\[\w\])?([\s\S]*?)"/g;
 
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
-
-    // Load JSON output file
+    // Get or create translation file
     var translationFile = this.files[0].dest[0];
     if (!grunt.file.exists(translationFile)) {
       grunt.log.writeln("Translation file doesn't exist – Creating new...");
@@ -34,24 +31,50 @@ module.exports = function (grunt) {
     var templates = grunt.file.expand({cwd: rootTemplateDir }, '**/*.html');
 
     templates.forEach(function(templateDir) {
-      var fileContent = grunt.file.read(rootTemplateDir + '/' + templateDir, { encoding: "utf8" });
-      // fileContent = fileContent.replace(/\r\n/g, "").replace(/[\r\n]/g, "");
-      grunt.log.write(fileContent);
-      
-      var re = /{{ ['|"]([\s\S]*?)["|'] \| i18next }}/g;
-      
-      var match;
-      var templateTranslations = {};
-      while ((match = re.exec(fileContent)) !== null) {
-        if (!(match[1] in translations)) {
-          templateTranslations[match[1]] = "";
+      fileContent = grunt.file.read(rootTemplateDir + '/' + templateDir, { encoding: "utf8" });
+    
+      templateTranslations = {
+        filter: {},
+        directive: {}
+      };
+
+      // Search for filter uses
+      while ((match = filterRegex.exec(fileContent)) !== null) {
+        // Remove newlines and more than 1 spaces in a row.
+        key = match[1].replace(/\n/g, " ").replace(/[ \t]{2,}/g, " ");
+
+        // Leave existing keys be!
+        if (!(key in translations)) {
+          templateTranslations.filter[key] = "";
         }
       }
-      translations[templateDir] = templateTranslations;
 
-      grunt.file.write(translationFile, JSON.stringify(translations, null, "    "), { encoding: "utf8"});
+      // Search for directive uses
+      while ((match = directiveRegex.exec(fileContent)) !== null) {
+        // Remove newlines and more than 1 spaces in a row.
+        key = match[1];//.replace(/\n/g, " ").replace(/[ \t]{2,}/g, " ");
+        grunt.log.writeln(key);
+        // Leave existing keys be!
+        if (!(key in translations)) {
+          templateTranslations.directive[key] = "";
+        }
+      }
+
+      translations[templateDir] = templateTranslations;
   
     });
+
+    /*
+      TODO
+
+      1. Parse list of languages, and get/create translation file for each one
+      2. Split into "existing" and "new" in order for translators to be able to see what needs translating.
+      3. Find outdated translations and move to "unused" key
+      
+    */
+
+    // Write back to JSON translation file
+    grunt.file.write(translationFile, JSON.stringify(translations, null, "    "), { encoding: "utf8"});
   });
 
 };

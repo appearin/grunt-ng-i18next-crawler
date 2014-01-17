@@ -33,21 +33,9 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     i18next_crawler: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+      test: {
+        src: ['test/fixtures'],
+        dest: ['tmp/translations.json']
       }
     },
 
