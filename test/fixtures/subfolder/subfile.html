@@ -1,0 +1,235 @@
+
+<div class="main-section">
+    <div class="main-section-overlay">
+        <header class="frontpage-header">
+            <h1><div class="logo main-logo" ng-include="'/images/logo.svg'"></div>appear.in</h1>
+            <h2 class="subtitle">{{ 'Create a room and talk together' | i18next }}</h2>
+        </header>
+        <main id="content" class="frontpage-main">
+            <div class="form-wrapper" ng-hide="warning">
+                <form action="" class="room-creation" ng-submit="launchRoom()">
+                    <p class="prething">appear.in/</p>
+                    <input id="room-namer" autofocus type="text" placeholder="{{ suggestedRoomName }}" title="{{roomNameRequirements}}" pattern="{{roomNamePattern}}" ng-model="roomName"><a class="refresh-button" ng-click="btnRandomizeName()">
+                        <i class="fa fa-refresh fa-lg"></i>
+                    </a>
+                    <input type="submit" value="create!" class="pink-button">
+                </form>
+            </div>
+            <div class="pitch">
+                <div ng-i18next="Video conversations with up to {{ roomFullThreshold }} people – for free."></div>
+                <div>{{ 'no login – no installs' | i18next }}</div>
+            </div>
+
+            <div class="social-icon-group">
+                <ul>
+                    <li class="social-icon">
+                        <a href="https://www.facebook.com/appear.in.video" target="_blank">
+                            <img draggable="false" src="/images/social/facebook.svg" height="32" width="32" alt="" />
+                        </a>
+                    </li>
+                    <li class="social-icon">
+                        <a href="http://twitter.com/appear_in" target="_blank">
+                            <img draggable="false" src="/images/social/twitter.svg" height="32" width="32" alt="" />
+                        </a>
+                    </li>
+                    <li class="social-icon">
+                        <a href="https://plus.google.com/109646364381968359041/" target="_blank">
+                            <img draggable="false" src="/images/social/googleplus.svg" height="32" width="32" alt="" />
+                        </a>
+                    </li>
+                </ul>
+
+            <div ng-show="warning">
+                <header>
+                    <h2 ng-show="warning == 'ipad'">{{ "iPad support forthcoming" | i18next }}</h2>
+                    <h2 ng-show="warning == 'iphone'">{{ "iPhone support forthcoming" | i18next }}</h2>
+                </header>
+
+                <p>{{ "We are working on making appear.in available for your device. Please consider subscribing to our newsletter for the latest information on the development on this." | i18next }}</p>
+                <form class="subscribe-newsletter inline" action="http://appear.us2.list-manage.com/subscribe/post?u=5919921b6414f5578ff5b7750&amp;id=fcc8f9fc1a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" ng-hide="newsletterSignupButtonPressed">
+                    <input type="email" placeholder="your@email.com" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                    <button type="submit" class="pink-button" name="subscribe" id="mc-embedded-subscribe" ng-click="newsletterSignupButtonPressed = true">{{ "Subscribe" | i18next }}</button>
+                </form>
+
+                <p ng-show="newsletterSignupButtonPressed">{{ "Thank you! We'll let you know as soon as it is ready!" | i18next }}</p>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+
+<aside>
+
+    <article class="testimonial" flags-show="testimonials">
+        <div class="content">
+            <section class="profile-image">
+                <img src="https://pbs.twimg.com/profile_images/378800000378993530/ca2830c5c9fba91f16e4fa3e4db0f3d4.jpeg" class="profile" alt="" height="70" width="70">
+            </section><section class="text">
+                <p class="body">
+                    "This was a neat web app that provided instant video collaboration; and I really do mean instant. It might be the simplest and quickest way of doing this type of thing that I’ve seen and that’s really, really impressive."
+                </p>
+
+                <section class="attribution">
+                    <p class="title">Pressgr.am</p>
+                    <p class="link"><a href="http://blog.pressgr.am/appear-in">http://blog.pressgr.am/appear-in</a></p>
+                </section>
+            </section>
+        </div>
+    </article>
+
+    <div class="description-section">
+        <section>
+            <h1 id="how-to-get-started">{{ 'How to get started' | i18next }}</h1>
+            <div class="how-to-section">
+                <h3>1. {{ 'Create a room' | i18next }}</h3>
+                <span class="image-container">
+                    <div class="form-wrapper illustration">
+                        <form action="" class="room-creation" ng-submit="launchRoom()">
+                            <input type="text" placeholder="{{ suggestedRoomName }}" title="{{roomNameRequirements}}" pattern="{{roomNamePattern}}" ng-model="roomName"><a class="refresh-button" ng-click="btnRandomizeName()">
+                                <i class="fa fa-refresh fa-lg"></i>
+                            </a>
+                            <input type="submit" value="create!" class="pink-button">
+                            <img class="cursor" src="/images/cursor.svg" alt="">
+                        </form>
+                    </div>
+                </span>
+                <p>{{ 'You can choose any name for your room – or we can generate a cool random name for you.' | i18next }}</p>
+            </div>
+            <div class="how-to-section">
+                <h3>2. {{ 'Copy the link' | i18next }}</h3>
+                <span class="image-container copy">
+                    <div class="copy-illustration">
+                        <div class="copy-wrapper">
+                            <p>appear.in/{{ roomName || suggestedRoomName }}</p><a class="room-button" ng-click="copyToClipboard();" vc-copy-to-clipboard data-clipboard-text="https://appear.in/{{ roomName || suggestedRoomName }}"><i class="fa fa-copy"></i> {{ 'Copy link' | i18next }}</a>
+                            <img class="cursor" src="/images/cursor.svg" alt="">
+                        </div>
+                    </div>
+                </span>
+                <p>{{ 'To enter your room, people can just go to the link of the room. Copy it and send it to them.' | i18next }}</p>
+            </div>
+            <div class="how-to-section">
+                <h3>3. {{ 'Share the link' | i18next }}</h3>
+                <span class="image-container">
+                    <ng-include src="'/templates/partials/fakechat.html'" scope="" onload=""></ng-include>
+                </span>
+                <p>{{ 'Send the link to others in email, chat, SMS or whatever you want, and tell them to click it.' | i18next }}</p>
+            </div>
+            <div class="how-to-section">
+                <h3>4. {{ 'Appear together!' | i18next }}</h3>
+                <span class="image-container">
+                    <span style="position: relative">
+                        <img src="/images/frontpage/step4.png" alt="Start chatting away"/>
+                    </span>
+                </span>
+                <p>{{ 'As soon as they click the link, they will appear in your room. Have fun!' | i18next }}</p>
+            </div>
+        </section>
+    </div>
+
+    <article class="testimonial" flags-show="testimonials">
+        <div class="content">
+            <section class="profile-image">
+                <img src="https://pbs.twimg.com/profile_images/416546045326155777/4kTqnqP2.jpeg" class="profile" alt="" height="70" width="70">
+            </section><section class="text">
+                <p class="body">
+                    "https://appear.in is magical - online hangouts as they should be done"
+                </p>
+
+                <section class="attribution">
+                    <p class="title"><a href="https://twitter.com/nabeelqu/" class="no-underscore">@nabeelqu</a> {{ 'on Twitter' | i18next }}</p>
+                    <p class="link"><a href="https://twitter.com/nabeelqu/status/410350710102835200">https://twitter.com/nabeelqu/status/410350710102835200</a></p>
+                </section>
+            </section>
+        </div>
+    </article>
+
+    <div class="description-section even">
+        <section>
+            <h1>{{ 'How it works' | i18next }}</h1>
+            <div class="left-column">
+                <h2>{{ 'No login or downloads' | i18next }}</h2>
+                <p>{{ 'appear.in aims to make it super-easy to start talking over video. Therefore, we do not require you to register an account or download anything. The link to your room is all you need to connect to those you want to talk to. All you need is yourself, someone to talk to and a supported browser.' | i18next }}</p>
+
+                <h2>{{ 'Easy to invite anyone' | i18next }}</h2>
+                <p> {{ "You can create a room whenever you want to, and use any room name. In fact, you don't even have to visit our front page, you can just type in 'appear.in/roomname' in the address bar in your browser, and you'll enter directly into the room! Anyone who enters the same room link as you, will come into your room." | i18next }}</p>
+
+                <h2>{{ 'Peer-to-peer' | i18next }}</h2>
+                <p>{{ 'appear.in uses peer-to-peer communication, meaning that the video streams are sent directly between you and the people you are talking to. Nothing is stored on our server and all the communication is encrypted over SSL.' | i18next }}</p>
+            </div>
+            <div class="right-column">
+                <h2>{{ 'Supported browsers' | i18next }}</h2>
+                {{ 'You can use appear.in in these browsers:' | i18next }}
+                <div class="icons">
+                    <ul>
+                        <li class="browser-icon">
+                            <a href="https://www.google.com/chrome" target="_blank">
+                                <img height="64" width="64" alt="chrome" src="/images/chrome-logo.svg" />
+                                <span>Chrome</span>
+                            </a>
+                        </li><li class="browser-icon">
+                            <a href="https://www.mozilla.org/firefox" target="_blank">
+                                <img height="64" width="64" alt="firefox" src="/images/firefox_128x128.png" />
+                                <span>Firefox</span>
+                            </a>
+                        </li><li class="browser-icon">
+                            <a href="http://www.opera.com/" target="_blank">
+                                <img height="64" width="64" alt="opera" src="/images/opera-logo.svg" />
+                                <span>Opera</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p>{{ 'appear.in is built with a technology called WebRTC. For you this means no plugins or installation. Currently WebRTC is only supported in the browsers above.' | i18next }}</p>
+                </div>
+                <h2>{{ 'Help!' | i18next }}</h2>
+                <p ng-i18next="[html]Check out our <a href='/information/faq'>FAQ</a> to find answers to the most common questions our users have. If you can't find the answer you're looking for, shoot us an <a href='mailto:feedback@appear.in'>email</a>."></p>
+            </div>
+        </section>
+    </div>
+
+    <article class="testimonial" flags-show="testimonials">
+        <div class="content">
+            <section class="profile-image">
+                <img src="https://pbs.twimg.com/profile_images/378800000767119551/6a0f139c3f85b023b8d7da81396b5343.png" class="profile" alt="" height="70" width="70">
+            </section><section class="text">
+                <p class="body">
+                    "A user can go to appear.in and on-the-fly can grab a URL for their their own video chat room.  No registration is required and as many as 7 others can be invited to the videoconference.  It’s free, simple and quick - and enables spontaneous group video communication."
+                </p>
+
+                <section class="attribution">
+                    <p class="title">WebRTC Insights</p>
+                    <p class="link"><a href="http://blog.pressgr.am/appear-in">http://webrtcinsights.quadrigaconsulting.co.uk/index.php/appear-in-your-own-broadcast/</a></p>
+                </section>
+            </section>
+        </div>
+    </article>
+
+    <div class="description-section">
+        <section>
+            <div class="left-column">
+                <h1>{{ 'Give us feedback' | i18next }}</h1>
+                <p ng-i18next="[html]If you need help, or just want to tell us how you like appear.in, contact us at <a href='mailto:feedback@appear.in'>feedback@appear.in</a>. Check out our blog at <a href='http://blog.appear.in'>blog.appear.in</a> to read about recent updates."></p>
+                <h2>{{ 'Get updates' | i18next }}</h2>
+                <p>{{ 'Be the first to know about improvements in appear.in! Sign up to our mailinglist to receive news and invitations to give your opinion about future features in appear.in.' | i18next }}</p>
+                <form class="subscribe-newsletter inline" action="http://appear.us2.list-manage.com/subscribe/post?u=5919921b6414f5578ff5b7750&amp;id=fcc8f9fc1a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" ng-hide="newsletterSignupButtonPressed">
+                    <input type="email" ng-i18next="[placeholder]your@email.com" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                    <button type="submit" class="pink-button" name="subscribe" id="mc-embedded-subscribe" ng-click="newsletterSignupButtonPressed = true">{{ 'Subscribe' | i18next }}</button>
+                    <div id="mce-responses" class="clear">
+                        <div class="response" id="mce-error-response" style="display:none"></div>
+                        <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+                </form>
+                <div ng-show="newsletterSignupButtonPressed">
+                    <p>{{ "Super duper thank you! We'll keep you in the loop!" | i18next }}</p>
+                </div>
+            </div>
+            <div class="right-column">
+                <h1>{{ 'Developers' | i18next }}</h1>
+                <p ng-i18next="[html]We have an API! Visit our developer pages at <a href='http://appearin.github.com'>appearin.github.com</a> and <a href='http://appearin.github.com/iswebrtcready'>appearin.github.com/iswebrtcready</a> for more information."></p>
+                <p ng-i18next="[html]The API is still in its early stages and highly underdocumented, but sign up on our <a href='http://eepurl.com/J-_Qr'>developer mailing list</a> to be kept updated on its future development. For now you can play around with what we got."></p>
+            </div>
+        </section>
+    </div>
+    <footer class="frontpage-footer">
+    </footer>
+</aside>

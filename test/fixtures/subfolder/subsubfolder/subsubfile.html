@@ -1,0 +1,115 @@
+<div class="content-wrapper error-page">
+    <div ng-switch="errorName" class="error-{{errorName}}">
+        <header class="logo" ng-include="'/images/logo.svg'"></header>
+
+        <div ng-switch-when="webrtc">
+
+            <div ng-switch="webrtcDetectedBrowser">
+                <div ng-switch-when="firefox">
+                    <header class="title">
+                        <h1 class="tk-futura-pt header-title-text">{{ 'Firefox is not up-to-date' | i18next }}</h1>
+                    </header>
+                    <p class="body">
+                        {{ 'Firefox normally updates itself automatically. Check that all updates are
+                        installed and restart Firefox if prompted to do so. Click on the logo below
+                        for detailed instructions on how to update Firefox.' | i18next }}
+                    </p>
+                    <a href="http://support.mozilla.org/kb/update-firefox-latest-version" class="browser-link">
+                        <article class="browser">
+                            <img src="/images/firefox_128x128.png">
+                            <p>Firefox</p>
+                        </article>
+                    </a>
+                </div>
+                <div ng-switch-when="chrome">
+                    <header class="title">
+                        <h1 class="tk-futura-pt header-title-text">{{ 'Chrome is not up-to-date' | i18next }}</h1>
+                    </header>
+                    <p class="body">
+                        {{ "Chrome normally updates itself automatically. Check that all updates are
+                        installed and restart Chrome if prompted to do so. Click on the logo below
+                        for detailed instructions on how to update Chrome." | i18next }}
+                    </p>
+                    <a href="http://support.google.com/chrome/answer/95414" class="browser-link">
+                        <article class="browser">
+                            <img height="128" width="128" src="/images/chrome-logo.svg">
+                            <p>Chrome</p>
+                        </article>
+                    </a>
+                </div>
+                <div ng-switch-when="opera">
+                    <header class="title">
+                        <h1 class="tk-futura-pt header-title-text">{{ 'Opera is not up-to-date' | i18next }}</h1>
+                    </header>
+                    <p class="body">
+                        {{ "Opera normally updates itself automatically. Check that all updates are
+                        installed and restart Opera if prompted to do so. Click on the logo below
+                        for detailed instructions on how to update Opera." | i18next }}
+                    </p>
+                    <a href="http://help.opera.com/Mac/12.10/en/autoupdate.html" class="browser-link">
+                        <article class="browser">
+                            <img height="128" width="128" src="/images/opera-logo.svg">
+                            <p>Opera</p>
+                        </article>
+                    </a>
+                </div>
+
+                <div ng-switch-default>
+                    <header class="title">
+                        <h1 class="tk-futura-pt header-title-text">{{ 'Your browser is currently not supported' | i18next }}</h1>
+                    </header>
+                    <p class="body">
+                        {{ "Don't worry, there is an easy fix. Click on one of the logos below and
+                            follow the instructions. You will be back here in a jiffy!" | i18next }}
+                    </p>
+                    <a href="http://chrome.google.com" class="browser-link">
+                        <article class="browser">
+                            <img height="128" width="128" src="/images/chrome-logo.svg">
+                            <p>Chrome</p>
+                        </article>
+                    </a>
+                    <a href="http://www.mozilla.org/firefox/all" class="browser-link">
+                        <article class="browser">
+                            <img src="/images/firefox_128x128.png">
+                            <p>Firefox</p>
+                        </article>
+                    </a>
+                    <a href="http://www.opera.com/" class="browser-link">
+                        <article class="browser">
+                            <img height="128" width="128" src="/images/opera-logo.svg">
+                            <p>Opera</p>
+                        </article>
+                    </a>
+                </div>
+            </div>
+            <p>
+                You can always check your current browser's compatibility with
+                <a href="http://iswebrtcready.appear.in">http://iswebrtcready.appear.in</a>
+            </p>
+        </div>
+
+        <section class="body" ng-switch-when="invalid-reset-token">
+
+            <header class="title">
+                <h1 class="header-title-text">Invalid link</h1>
+            </header>
+
+            <p class="body">The link to reset your room code is no longer valid.</p>
+
+        </section>
+
+        <div ng-switch-when="invalid-room">
+            <header>
+                <h1>{{ 'The room name was invalid.' | i18next }}</h1>
+                <p>{{roomNameRequirements}}</p>
+            </header>
+        </div>
+
+        <div ng-switch-default>
+            <header>
+                <h1>{{ 'Unknown error.' | i18next }}</h1>
+            </header>
+        </div>
+
+    </div>
+</div>
