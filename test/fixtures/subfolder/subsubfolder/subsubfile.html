@@ -1,115 +1,94 @@
-<div class="content-wrapper error-page">
-    <div ng-switch="errorName" class="error-{{errorName}}">
-        <header class="logo" ng-include="'/images/logo.svg'"></header>
+<div>
+    <a href="https://appear.in" ng-i18next>Back to appear.in</a>
+    <div class="informationpage">
+        <h1><div class="logo main-logo" ng-include="'/images/logo.svg'"></div>appear.in</h1>
+        <h2 ng-i18next>Frequently asked questions</h2>
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next>Why does appear.in only work with Firefox and Chrome?</h1>
+                </header>
+                <p ng-i18next="[html]">
+                    appear.in is built using <a href='http://www.webrtc.org/' target='_blank'>WebRTC</a>, a new web standard which is currently only supported in newer versions of Firefox, Chrome, and Opera. appear.in supports the two latest version of these browsers, so if it doesn't work, try updating your browser. So for the time being, you will not be able to use it in other browsers. However, we are hopeful that more browsers will add WebRTC support soon!
+                </p>
+            </article>
 
-        <div ng-switch-when="webrtc">
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next>appear.in uses a different camera device than the one I wanted to use</h1>
+                </header>
+                <p ng-i18next="[html]">
+                    Your browser remembers which device you have previously used with
+                    appear.in, and automatically uses that. You can manually change the
+                    device by pressing the little icon that looks like a camera in your
+                    address bar. It can be found to the right in Chrome and to the left in Firefox and Opera.
+                </p>
+            </article>
 
-            <div ng-switch="webrtcDetectedBrowser">
-                <div ng-switch-when="firefox">
-                    <header class="title">
-                        <h1 class="tk-futura-pt header-title-text">{{ 'Firefox is not up-to-date' | i18next }}</h1>
-                    </header>
-                    <p class="body">
-                        {{ 'Firefox normally updates itself automatically. Check that all updates are
-                        installed and restart Firefox if prompted to do so. Click on the logo below
-                        for detailed instructions on how to update Firefox.' | i18next }}
-                    </p>
-                    <a href="http://support.mozilla.org/kb/update-firefox-latest-version" class="browser-link">
-                        <article class="browser">
-                            <img src="/images/firefox_128x128.png">
-                            <p>Firefox</p>
-                        </article>
-                    </a>
-                </div>
-                <div ng-switch-when="chrome">
-                    <header class="title">
-                        <h1 class="tk-futura-pt header-title-text">{{ 'Chrome is not up-to-date' | i18next }}</h1>
-                    </header>
-                    <p class="body">
-                        {{ "Chrome normally updates itself automatically. Check that all updates are
-                        installed and restart Chrome if prompted to do so. Click on the logo below
-                        for detailed instructions on how to update Chrome." | i18next }}
-                    </p>
-                    <a href="http://support.google.com/chrome/answer/95414" class="browser-link">
-                        <article class="browser">
-                            <img height="128" width="128" src="/images/chrome-logo.svg">
-                            <p>Chrome</p>
-                        </article>
-                    </a>
-                </div>
-                <div ng-switch-when="opera">
-                    <header class="title">
-                        <h1 class="tk-futura-pt header-title-text">{{ 'Opera is not up-to-date' | i18next }}</h1>
-                    </header>
-                    <p class="body">
-                        {{ "Opera normally updates itself automatically. Check that all updates are
-                        installed and restart Opera if prompted to do so. Click on the logo below
-                        for detailed instructions on how to update Opera." | i18next }}
-                    </p>
-                    <a href="http://help.opera.com/Mac/12.10/en/autoupdate.html" class="browser-link">
-                        <article class="browser">
-                            <img height="128" width="128" src="/images/opera-logo.svg">
-                            <p>Opera</p>
-                        </article>
-                    </a>
-                </div>
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next>Screen sharing does not work. I keep pressing the button and nothing happens</h1>
+                </header>
+                <p ng-i18next="[html]">
+                    Screen sharing only works if all participants are using one of the two latest versions of Chrome.
+                    To use screen sharing in Chrome, there is a configuration setting that needs to be
+                    enabled first. Follow these steps to activate screen sharing:
+                </p>
+                <ol>
+                    <li ng-i18next>
+                        Go to chrome://flags
+                    </li>
+                    <li ng-i18next>
+                        Find the setting called “Enable screen capture support in getUserMedia()”
+                    </li>
+                    <li ng-i18next>
+                        Click enable
+                    </li>
+                </ol>
+                <p ng-i18next>
+                    The browser then has to be restarted for these changes to take effect.
+                </p>
+            </article>
 
-                <div ng-switch-default>
-                    <header class="title">
-                        <h1 class="tk-futura-pt header-title-text">{{ 'Your browser is currently not supported' | i18next }}</h1>
-                    </header>
-                    <p class="body">
-                        {{ "Don't worry, there is an easy fix. Click on one of the logos below and
-                            follow the instructions. You will be back here in a jiffy!" | i18next }}
-                    </p>
-                    <a href="http://chrome.google.com" class="browser-link">
-                        <article class="browser">
-                            <img height="128" width="128" src="/images/chrome-logo.svg">
-                            <p>Chrome</p>
-                        </article>
-                    </a>
-                    <a href="http://www.mozilla.org/firefox/all" class="browser-link">
-                        <article class="browser">
-                            <img src="/images/firefox_128x128.png">
-                            <p>Firefox</p>
-                        </article>
-                    </a>
-                    <a href="http://www.opera.com/" class="browser-link">
-                        <article class="browser">
-                            <img height="128" width="128" src="/images/opera-logo.svg">
-                            <p>Opera</p>
-                        </article>
-                    </a>
-                </div>
-            </div>
-            <p>
-                You can always check your current browser's compatibility with
-                <a href="http://iswebrtcready.appear.in">http://iswebrtcready.appear.in</a>
-            </p>
-        </div>
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next>Are there any security concerns when using this service?</h1>
+                </header>
+                <p ng-i18next>
+                    All information sent between your browser and appear.in is sent via an encrypted connection (HTTPS). WebRTC encrypts all of the peer-to-peer video and audio streams.
 
-        <section class="body" ng-switch-when="invalid-reset-token">
+                    You should also be aware that all rooms are currently public, thus anyone entering a room name will be able to access that room. Anyone who joins a room will be visible to all other participants in that room, so there is no way to join a room unnoticed. If you want to prevent others from coming into the conversation, you can lock the room by clicking the lock button in the menu. No new participants will then be able to enter the room.
+                </p>
+            </article>
 
-            <header class="title">
-                <h1 class="header-title-text">Invalid link</h1>
-            </header>
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next="[html]">
+                        I keep getting the error message &quot;We are sorry, but we are not able to set up a connection. Try switching to another network&quot;
+                    </h1>
+                </header>
+                <p ng-i18next>
+                    You might be on a network that is blocking peer-to-peer connections. Some corporate networks have limitations on this, and firewalls that block certain traffic. Try switching to another network or set up a VPN connection.
 
-            <p class="body">The link to reset your room code is no longer valid.</p>
+                    You can also try switching to another browser, or update your current browser.
+                </p>
+            </article>
+            <article class="faq">
 
-        </section>
-
-        <div ng-switch-when="invalid-room">
             <header>
-                <h1>{{ 'The room name was invalid.' | i18next }}</h1>
-                <p>{{roomNameRequirements}}</p>
+                <h1 ng-i18next>How many people can be in a video meeting at the same time</h1>
             </header>
-        </div>
+                <p ng-i18next>
+                    We recommend not being more than 8 participants in the room, as this can cause the web page to crash because of the number of connections being handled. Otherwise, the only limiting factor is the bandwidth of the participants, as everything is streamed peer to peer. If you experience poor quality when talking to many people, you can try disabling your camera.
+                </p>
+            </article>
 
-        <div ng-switch-default>
-            <header>
-                <h1>{{ 'Unknown error.' | i18next }}</h1>
-            </header>
-        </div>
-
+            <article class="faq">
+                <header>
+                    <h1 ng-i18next>I have a suggestion for a new feature or a problem</h1>
+                </header>
+                <p>
+                    <span ng-i18next>Please contact us at</span> <a href="mailto:feedback@appear.in">feedback@appear.in</a>.
+                </p>
+            </article>
     </div>
 </div>

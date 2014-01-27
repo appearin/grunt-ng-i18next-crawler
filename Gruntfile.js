@@ -1,5 +1,5 @@
 /*
- * grunt-i18next-crawler
+ * grunt-ng-i18next-crawler
  * 
  *
  * Copyright (c) 2014 Thomas Bruun
@@ -32,10 +32,13 @@ module.exports = function (grunt) {
     },
 
     // Configuration to be run (and then tested).
-    i18next_crawler: {
+    ng_i18next_crawler: {
       test: {
         src: ['test/fixtures'],
-        dest: ['tmp/translations.json']
+        dest: ['tmp/translations'],
+        options: {
+          languages: ['no_NB', 'fr_FR', 'en_US']
+        }
       }
     },
 
@@ -51,7 +54,7 @@ module.exports = function (grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'i18next_crawler', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'ng_i18next_crawler', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
