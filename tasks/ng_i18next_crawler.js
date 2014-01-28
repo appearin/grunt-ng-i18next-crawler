@@ -67,7 +67,8 @@ module.exports = function (grunt) {
     var translations = {
       unused: {},
       missing: {},
-      translated: {}
+      translated: {},
+      fixed: {}
     };
     
     function exists(file, key) {
@@ -129,6 +130,9 @@ module.exports = function (grunt) {
             flat[key] = translations.translated[file][key];
           }
         }
+        for (var key in translations.fixed) {
+          flat[key] = translations.fixed[key];
+        }
         return flat;
       },
       getRaw: function() {
@@ -164,7 +168,8 @@ module.exports = function (grunt) {
     var translations = {
       unused: {},
       missing: {},
-      translated: {}
+      translated: {},
+      fixed: {}
     };
     if (!grunt.file.exists(path)) {
       grunt.log.warn("Translation file for '" + language + "' does not exist – Creating...");
