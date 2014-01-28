@@ -97,12 +97,14 @@ module.exports = function (grunt) {
         }
       },
       addKey: function(file, key) {
-        // If the key is now translated, move it over to the translated object
-        if (key in translations.missing[file] && translations.missing[file][key] !== "") {
+        if (key in translations.missing[file] && !!translations.missing[file][key]) {
           translations.translated[file][key] = translations.missing[file][key];
           delete translations.missing[file][key];
-        } else {
-          translations.missing[file][key] = "";
+        } else if (key in translations.unused[file] && !!translations.unused[file][key]){
+          translations.translated[file][key] = translations.unused[file][key];
+          delete translations.unused[file][key];
+        } else if (!(key in translations.translated[file])){
+            translations.missing[file][key] = "";
         }
       },
       updateUnused: function(file, keysInFile) {
