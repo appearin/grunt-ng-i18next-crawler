@@ -207,6 +207,10 @@ module.exports = function (grunt) {
 
         var key = (attributeContent || elementContent);
         if (key) {
+          key = key.replace(/\n/g, " ").replace(/^\s+|\s+$/g,"").replace(/[ \t]{2,}/g, " ");
+          if (key[0] === '{' && key[1] === '{') {
+            return;
+          }
           keys[file].push(key.replace(/\n/g, " ").replace(/^\s+|\s+$/g,"").replace(/[ \t]{2,}/g, " "));
         }
       });
