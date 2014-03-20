@@ -5,7 +5,8 @@
             "dropAreaText": {}
         },
         "root.html": {
-            "Create a room and talk together": ""
+            "Create a room and talk together": "",
+            "{{Create}} a room and talk together": ""
         },
         "subfolder/subfile.html": {
             "Customize this room": "",

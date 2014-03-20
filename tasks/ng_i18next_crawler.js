@@ -208,10 +208,10 @@ module.exports = function (grunt) {
         var key = (attributeContent || elementContent);
         if (key) {
           key = key.replace(/\n/g, " ").replace(/^\s+|\s+$/g,"").replace(/[ \t]{2,}/g, " ");
-          if (key[0] === '{' && key[1] === '{') {
+          if (key.substr(0,2) === '{{' && key.substr(key.length-2,2) === '}}') {
             return;
           }
-          keys[file].push(key.replace(/\n/g, " ").replace(/^\s+|\s+$/g,"").replace(/[ \t]{2,}/g, " "));
+          keys[file].push(key);
         }
       });
     });
