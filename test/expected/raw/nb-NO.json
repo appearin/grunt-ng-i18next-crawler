@@ -1,0 +1,22 @@
+{
+    "unused": {},
+    "missing": {
+        "variables": {
+            "dropAreaText": {}
+        },
+        "root.html": {
+            "Create a room and talk together": ""
+        },
+        "subfolder/subfile.html": {
+            "Customize this room": "",
+            "Select a background": "",
+            "Or <strong>select a file</strong>": ""
+        }, 
+        "subfolder/subsubfolder/subsubfile.html": {
+            "Why does appear.in only work with Firefox and Chrome?": "",
+            "appear.in is built using <a href=\"http://www.webrtc.org/\" target=\"_blank\">WebRTC</a>, a new web standard which is currently only supported in newer versions of Firefox, Chrome, and Opera. appear.in supports the two latest version of these browsers, so if it doesn't work, try updating your browser. So for the time being, you will not be able to use it in other browsers. However, we are hopeful that more browsers will add WebRTC support soon!": ""
+        }
+    },
+    "translated": {},
+    "fixed": {}
+}

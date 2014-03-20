@@ -1,12 +1,12 @@
 <h1 ng-i18next>Customize this room</h1>
 
-<p ng-i18next>Drag and drop an image to set the background of this room.</p>
+
 <div id="customize-drag-drop-field-wrapper">
     <div class="customize-drag-drop-field" drag-area="handleDragEvent" drop-area="handleDroppedFile" ng-class="{ dragging: isDraggingInDropField, empty: !imagePreviewUrl }">
         <div ng-show="!imagePreviewUrl" class="imagePreviewUrl">
-            <p>{{ dropAreaText }}</p>
-            <input id="backgroundFileSelect" type="file" file-selector="handleSelectedFile" />
-            <button ng-hide="dropAreaText != 'Drag an image here'" ng-click="onFileSelectButtonClicked()" class="background-file-select-button fa fa-upload green-button button-icon" ng-i18next>Or select a file</button>
+            <p ng-i18next>{{ dropAreaText }}</p>
+            <input id="backgroundFileSelect" type="file" ng-i18next="[placeholder]Select a background" file-selector="handleSelectedFile" />
+            <button ng-hide="dropAreaText != 'Drag an image here'" ng-click="onFileSelectButtonClicked()" class="background-file-select-button fa fa-upload green-button button-icon" ng-i18next="[html]">Or <strong>select a file</strong></button>
         </div>
         <div ng-show="imagePreviewUrl" class="image-preview-url">
             <div class="remove-preview-wrapper">
@@ -15,23 +15,4 @@
             <img ng-src="{{ imagePreviewUrl }}"></img>
         </div>
     </div>
-</div>
-<p class="small" ng-i18next>Heads up: Your background image will be publicly visible unless you lock your room.</p>
-
-<form name="customizeForm" id="customize-form">
-    <div ng-if="!isSelfOwner">
-        <p ng-i18next>You need to own the room to customize it. Claim it now by setting a room code:</p>
-
-        <div class="form-row">
-            <input type="password" ng-model="customizeForm.password" id="password" ng-i18next="[placeholder]Room code" autofocus></input>
-            <button ng-click="submitCustomize()" ng-disabled="!enableSubmit()" class="green-button allow-pointer-events" type="submit" ng-i18next>Go!</button>
-        </div>
-    </div>
-    <div ng-if="isSelfOwner">
-        <button ng-click="submitCustomize()" ng-disabled="!enableSubmit()" class="green-button allow-pointer-events" type="submit" ng-i18next>Go!</button>
-    </div>
-</form>
-<div ng-if="customizeRoomError">
-    <p class="error" ng-i18next="{{customizeRoomError}}"></p>
-    <p class="error" ng-i18next="Oh my gawd this is a string that should be parsed!"></p>
 </div>

@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures'],
         dest: ['tmp/translations'],
         options: {
-          languages: ['no_NB', 'fr_FR', 'en_US']
+          languages: ['nb-NO']
         }
       }
     },

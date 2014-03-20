@@ -27,13 +27,20 @@ exports.ng_i18next_crawler = {
     // setup here if necessary
     done();
   },
-  filters: function (test) {
-    // Test that all occurrences of i18next filters are correctly parsed and inserted into the translation file
-    // test.expect(1);
+  test: function (test) {
+    // test.expect(4);
 
-    // var actual = grunt.file.read('tmp/translations.json');
-    // var expected = grunt.file.read('test/expected/translations.json');
-    // test.equal(actual, expected, 'should parse all ng-i18next filter uses correctly');
+    var actual = grunt.file.readJSON('tmp/translations/raw/nb-NO.json');
+    var expected = grunt.file.readJSON('test/expected/raw/nb-NO.json');
+
+    test.deepEqual(actual.unused, {}, "there should not be any unused keys");
+    test.deepEqual(actual.translated, {}, "there should not be any translated keys");
+    test.deepEqual(actual.fixed, {}, "there should not be any fixed keys");
+
+    test.deepEqual(actual.missing['root.html'], expected.missing['root.html'], "should parse templates in the template root folder");
+    test.deepEqual(actual.missing['subfolder/subfile.html'], expected.missing['subfolder/subfile.html'], "should parse templates in a subfolder")
+    test.deepEqual(actual.missing['subfolder/subsubfolder/subsubfile.html'], expected.missing['subfolder/subsubfolder/subsubfile.html'], "should parse templates in an even deeper folder")
+
 
     test.done();
   }

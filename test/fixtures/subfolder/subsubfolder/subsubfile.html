@@ -1,93 +1,12 @@
 <div>
-    <a href="https://appear.in" ng-i18next>Back to appear.in</a>
     <div class="informationpage">
         <h1><div class="logo main-logo" ng-include="'/images/logo.svg'"></div>appear.in</h1>
-        <h2 ng-i18next>Frequently asked questions</h2>
             <article class="faq">
                 <header>
                     <h1 ng-i18next>Why does appear.in only work with Firefox and Chrome?</h1>
                 </header>
                 <p ng-i18next="[html]">
                     appear.in is built using <a href='http://www.webrtc.org/' target='_blank'>WebRTC</a>, a new web standard which is currently only supported in newer versions of Firefox, Chrome, and Opera. appear.in supports the two latest version of these browsers, so if it doesn't work, try updating your browser. So for the time being, you will not be able to use it in other browsers. However, we are hopeful that more browsers will add WebRTC support soon!
-                </p>
-            </article>
-
-            <article class="faq">
-                <header>
-                    <h1 ng-i18next>appear.in uses a different camera device than the one I wanted to use</h1>
-                </header>
-                <p ng-i18next="[html]">
-                    Your browser remembers which device you have previously used with
-                    appear.in, and automatically uses that. You can manually change the
-                    device by pressing the little icon that looks like a camera in your
-                    address bar. It can be found to the right in Chrome and to the left in Firefox and Opera.
-                </p>
-            </article>
-
-            <article class="faq">
-                <header>
-                    <h1 ng-i18next>Screen sharing does not work. I keep pressing the button and nothing happens</h1>
-                </header>
-                <p ng-i18next="[html]">
-                    Screen sharing only works if all participants are using one of the two latest versions of Chrome.
-                    To use screen sharing in Chrome, there is a configuration setting that needs to be
-                    enabled first. Follow these steps to activate screen sharing:
-                </p>
-                <ol>
-                    <li ng-i18next>
-                        Go to chrome://flags
-                    </li>
-                    <li ng-i18next>
-                        Find the setting called “Enable screen capture support in getUserMedia()”
-                    </li>
-                    <li ng-i18next>
-                        Click enable
-                    </li>
-                </ol>
-                <p ng-i18next>
-                    The browser then has to be restarted for these changes to take effect.
-                </p>
-            </article>
-
-            <article class="faq">
-                <header>
-                    <h1 ng-i18next>Are there any security concerns when using this service?</h1>
-                </header>
-                <p ng-i18next>
-                    All information sent between your browser and appear.in is sent via an encrypted connection (HTTPS). WebRTC encrypts all of the peer-to-peer video and audio streams.
-
-                    You should also be aware that all rooms are currently public, thus anyone entering a room name will be able to access that room. Anyone who joins a room will be visible to all other participants in that room, so there is no way to join a room unnoticed. If you want to prevent others from coming into the conversation, you can lock the room by clicking the lock button in the menu. No new participants will then be able to enter the room.
-                </p>
-            </article>
-
-            <article class="faq">
-                <header>
-                    <h1 ng-i18next="[html]">
-                        I keep getting the error message &quot;We are sorry, but we are not able to set up a connection. Try switching to another network&quot;
-                    </h1>
-                </header>
-                <p ng-i18next>
-                    You might be on a network that is blocking peer-to-peer connections. Some corporate networks have limitations on this, and firewalls that block certain traffic. Try switching to another network or set up a VPN connection.
-
-                    You can also try switching to another browser, or update your current browser.
-                </p>
-            </article>
-            <article class="faq">
-
-            <header>
-                <h1 ng-i18next>How many people can be in a video meeting at the same time</h1>
-            </header>
-                <p ng-i18next>
-                    We recommend not being more than 8 participants in the room, as this can cause the web page to crash because of the number of connections being handled. Otherwise, the only limiting factor is the bandwidth of the participants, as everything is streamed peer to peer. If you experience poor quality when talking to many people, you can try disabling your camera.
-                </p>
-            </article>
-
-            <article class="faq">
-                <header>
-                    <h1 ng-i18next>I have a suggestion for a new feature or a problem</h1>
-                </header>
-                <p>
-                    <span ng-i18next>Please contact us at</span> <a href="mailto:feedback@appear.in">feedback@appear.in</a>.
                 </p>
             </article>
     </div>
