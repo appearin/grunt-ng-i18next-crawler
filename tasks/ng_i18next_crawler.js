@@ -164,7 +164,7 @@ module.exports = function (grunt) {
   function ensureDirectories(dirs) {
     dirs.forEach(function (dir) {
       if (!grunt.file.isDir(dir)) {
-        grunt.log.warn("Directory '" + dir + "' does not exist – Creating...");
+        grunt.log.verbose("Directory '" + dir + "' does not exist – Creating...");
         grunt.file.mkdir(dir);
       }
     });
@@ -177,7 +177,7 @@ module.exports = function (grunt) {
       translated: {}
     };
     if (!grunt.file.exists(path)) {
-      grunt.log.warn("Translation file for '" + language + "' does not exist – Creating...");
+      grunt.log.verbose("Translation file for '" + language + "' does not exist – Creating...");
       grunt.file.write(path, translations, { encoding: "utf8"});
     } else {
       translations = grunt.file.readJSON(path, { encoding: "utf8"});
