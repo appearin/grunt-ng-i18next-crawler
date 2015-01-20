@@ -6,7 +6,8 @@
         },
         "root.html": {
             "Create a room and talk together": "",
-            "{{Create}} a room and talk together": ""
+            "{{Create}} a room and talk together": "",
+            "Don't forget: a text with; special ch@racters %$# \"`´ \\/ & &amp; 東京": ""
         },
         "subfolder/subfile.html": {
             "Customize this room": "",
