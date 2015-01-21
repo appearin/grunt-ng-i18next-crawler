@@ -24,14 +24,16 @@
       "type": "MIT"
     }
   ],
+  "dependencies": {
+    "cheerio": "~0.13.1"
+  },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.2.0",
     "grunt-contrib-nodeunit": "~0.1.2",
     "grunt-contrib-clean": "~0.4.0",
     "grunt": "~0.4.0rc2",
     "load-grunt-tasks": "~0.2.0",
-    "jshint-stylish": "~0.1.3",
-    "cheerio": "~0.13.1"
+    "jshint-stylish": "~0.1.3"
   },
   "scripts": {
     "test": "grunt test"
