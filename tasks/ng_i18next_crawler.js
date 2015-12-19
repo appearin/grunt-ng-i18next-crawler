@@ -9,8 +9,9 @@
 'use strict';
 
 module.exports = function (grunt) {
-  var cheerio = require('cheerio'),
-      $;
+  var _ = require('underscore');
+  var cheerio = require('cheerio');
+  var $;
 
   grunt.registerMultiTask('ng_i18next_crawler', 'Crawl templates files, find uses of ng-i18next, and generate keys in your translation files', function () {
     var fileContent, match, keys, key, templateTranslations, translationPath;
@@ -35,7 +36,6 @@ module.exports = function (grunt) {
       var existingTranslations = getTranslationsForLanguage(getRawPath(language), language);
       translations[language] = getLanguageObject(language);
       translations[language].populate(existingTranslations);
-
     });
 
     // Find all HTML template files
@@ -46,14 +46,13 @@ module.exports = function (grunt) {
 
     // Associate keys with languages
     languages.forEach(function (language) {
-
-      for (var file in fileTranslations) {
-        translations[language].addFile(file);
-        fileTranslations[file].forEach(function (key) {
-          translations[language].addKey(file, key);
+      _.each(fileTranslations, function (fileTranslation, fileName) {
+        translations[language].addFile(fileName);
+        fileTranslation.forEach(function (key) {
+          translations[language].addKey(fileName, key);
         });
-        translations[language].updateUnused(file, fileTranslations[file]);
-      }
+        translations[language].updateUnused(fileName, fileTranslation);
+      });
     });
 
     // Write back to JSON translation files
@@ -111,18 +110,18 @@ module.exports = function (grunt) {
       },
       updateUnused: function(file, keysInFile) {
         // Move translated keys to the unused object
-        for (var key in translations.translated[file]) {
+        _.each(translations.translated[file], function (key) {
           if (keysInFile.indexOf(key) === -1) {
             translations.unused[file][key] = translations.translated[file][key];
-            delete translations.translated[file][key]
+            delete translations.translated[file][key];
           }
-        }
+        });
         // Delete untranslated keys that are no longer used
-        for (var key in translations.missing[file]) {
+        _.each(translations.missing[file], function (key) {
           if (keysInFile.indexOf(key) === -1) {
-            delete translations.missing[file][key]
+            delete translations.missing[file][key];
           }
-        }
+        });
       },
       flatten: function() {
         var flat = {};
@@ -131,9 +130,10 @@ module.exports = function (grunt) {
             flat[key] = translations.translated[file][key];
           }
         }
-        for (var key in fixed) {
+        _.each(fixed, function (key) {
           flat[key] = fixed[key];
-        }
+        });
+
         return flat;
       },
       getRaw: function() {
@@ -145,14 +145,14 @@ module.exports = function (grunt) {
       populate: function(input) {
         for (var type in translations) {
           if (type in input) {
-            translations[type] = input[type]
+            translations[type] = input[type];
           }
         }
         if ("fixed" in input) {
           fixed = input.fixed;
         }
       }
-    }
+    };
   } 
   
   function generateTranslationDir(dir) {
@@ -192,8 +192,9 @@ module.exports = function (grunt) {
     templates.forEach(function(file) {
       keys[file] = [];
       fileContent = grunt.file.read(rootTemplateDir + '/' + file, { encoding: "utf8" });
-      
-      $ = cheerio.load(fileContent);
+      $ = cheerio.load(fileContent, {
+        decodeEntities: false
+      });
       templateTranslations = {};
 
       // Find all uses of the attribute, and extract the translation key
