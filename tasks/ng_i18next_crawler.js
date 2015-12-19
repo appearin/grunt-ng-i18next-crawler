@@ -110,14 +110,14 @@ module.exports = function (grunt) {
       },
       updateUnused: function(file, keysInFile) {
         // Move translated keys to the unused object
-        _.each(translations.translated[file], function (key) {
+        _.each(translations.translated[file], function (value, key) {
           if (keysInFile.indexOf(key) === -1) {
             translations.unused[file][key] = translations.translated[file][key];
             delete translations.translated[file][key];
           }
         });
         // Delete untranslated keys that are no longer used
-        _.each(translations.missing[file], function (key) {
+        _.each(translations.missing[file], function (value, key) {
           if (keysInFile.indexOf(key) === -1) {
             delete translations.missing[file][key];
           }
@@ -130,8 +130,8 @@ module.exports = function (grunt) {
             flat[key] = translations.translated[file][key];
           }
         }
-        _.each(fixed, function (key) {
-          flat[key] = fixed[key];
+        _.each(fixed, function (value, key) {
+          flat[key] = value;
         });
 
         return flat;
