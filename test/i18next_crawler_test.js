@@ -23,13 +23,7 @@ var grunt = require('grunt');
 */
 
 exports.ng_i18next_crawler = {
-  setUp: function (done) {
-    // setup here if necessary
-    done();
-  },
   test: function (test) {
-    // test.expect(4);
-
     var actual = grunt.file.readJSON('tmp/translations/raw/nb-NO.json');
     var expected = grunt.file.readJSON('test/expected/raw/nb-NO.json');
 
@@ -38,9 +32,8 @@ exports.ng_i18next_crawler = {
     test.deepEqual(actual.fixed, {}, "there should not be any fixed keys");
 
     test.deepEqual(actual.missing['root.html'], expected.missing['root.html'], "should parse templates in the template root folder");
-    test.deepEqual(actual.missing['subfolder/subfile.html'], expected.missing['subfolder/subfile.html'], "should parse templates in a subfolder")
-    test.deepEqual(actual.missing['subfolder/subsubfolder/subsubfile.html'], expected.missing['subfolder/subsubfolder/subsubfile.html'], "should parse templates in an even deeper folder")
-
+    test.deepEqual(actual.missing['subfolder/subfile.html'], expected.missing['subfolder/subfile.html'], "should parse templates in a subfolder");
+    test.deepEqual(actual.missing['subfolder/subsubfolder/subsubfile.html'], expected.missing['subfolder/subsubfolder/subsubfile.html'], "should parse templates in an even deeper folder");
 
     test.done();
   }
